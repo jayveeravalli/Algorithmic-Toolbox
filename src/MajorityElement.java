@@ -5,6 +5,9 @@ public class MajorityElement {
 
     /**
      * Good job! (Max time used: 0.45/1.50, max memory used: 48398336/536870912.)
+     *
+     * Time : O(n)
+     * Space: O(n)
      */
 
     private static int getMajorityElement(int[] a, int left, int right) {
@@ -25,6 +28,9 @@ public class MajorityElement {
 
     /**
      * Good job! (Max time used: 0.46/1.50, max memory used: 48721920/536870912.)
+     *
+     * Time O(n)
+     * Space O(n)
      **/
     private static int getMajorityElement2(int[] a, int left, int right) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -49,6 +55,9 @@ public class MajorityElement {
 
     /**
      * Good job! (Max time used: 0.34/1.50, max memory used: 43737088/536870912.
+     *
+     * Time O(nlogn)
+     * Space O(1)
      * **/
 
     private static int getMajorityElement3(int[] a, int left, int right) {
@@ -87,7 +96,13 @@ public class MajorityElement {
         return -1;
     }
 
-    private static int boyer_moore_algorithm(int[] a) {
+    /**
+     * Good job! (Max time used: 0.30/1.50, max memory used: 44728320/536870912.)
+     *
+     * Time O(n)
+     * Space O(1)
+     * **/
+    private static boolean boyer_moore_algorithm(int[] a) {
         int count = 0;
         int candidate = 0;
 
@@ -99,7 +114,9 @@ public class MajorityElement {
             count += (candidate == i) ? 1 : -1;
         }
 
-        return candidate;
+
+
+        return majorityElement(a, 0, a.length-1, candidate);
     }
 
     private static boolean majorityElement(int[] a, int lo, int hi, int V) {
@@ -122,12 +139,15 @@ public class MajorityElement {
             a[i] = scanner.nextInt();
         }
 
-        int elem = getMajorityElement3(a, 0, a.length - 1);
-        if (elem >= 0) {
-            System.out.println(1);
-        } else {
-            System.out.println(0);
-        }
+//        int elem = getMajorityElement3(a, 0, a.length - 1);
+//        if (elem >= 0) {
+//            System.out.println(1);
+//        } else {
+//            System.out.println(0);
+//        }
+
+        int result = boyer_moore_algorithm(a) ? 1 : 0;
+        System.out.println(result);
     }
 
     public static void test() {

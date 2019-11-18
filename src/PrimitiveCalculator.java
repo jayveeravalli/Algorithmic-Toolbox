@@ -6,13 +6,14 @@ public class PrimitiveCalculator {
     private static int[] minOperations;
 
 
-    private static int minOps(int n) {
+    private static void minOps(int n) {
 
         if (n < 1)
             throw new IllegalArgumentException();
 
         if (n == 1) {
-            return 0;
+            minOperations = new int[2];
+            return;
         }
 
         minOperations = new int[n+1];
@@ -39,7 +40,6 @@ public class PrimitiveCalculator {
 
         }
 
-        return minOperations[n];
     }
 
     private static List<Integer> getSteps(int m) {
@@ -56,9 +56,9 @@ public class PrimitiveCalculator {
             } else if(m % 2 == 0 && m % 3 == 0) {
                 m = m / 3;
             } else if (m % 3 == 0) {
-                m = (minOps(m-1) > minOps(m/3)) ? m/3 : m-1;
+                m = (minOperations[m-1] > minOperations[m/3]) ? m/3 : m-1;
             } else {
-                m = (minOps(m-1) > minOps(m/2)) ? m/2 : m-1;
+                m = (minOperations[m-1] > minOperations[m/2]) ? m/2 : m-1;
             }
         }
 
